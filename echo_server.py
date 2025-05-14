@@ -4,8 +4,8 @@ HOST = '127.0.0.1'
 PORT = 12345
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SQL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socketbind((HOST, PORT))
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server_socket.bind((HOST, PORT))
 server_socket.listen()
 print(f'Echo 서버 시작: {HOST}:{PORT}에서 클라이언트 연결 대기중...')
 
@@ -13,7 +13,9 @@ cliente_socket, client_addr = server_socket.accept()
 print(f'{client_addr}와 연결되었습니다')
 
 while True:
-    data = client_socket.recv(1024)
+    print('before receive')
+    data = client_socket.recv(1024) # 한번에 받을 수 있는 데이터의 크기
+    print('after receive')
     if not data:
         break
     received_str = data.decode('utf-8')
