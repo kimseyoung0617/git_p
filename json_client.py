@@ -1,6 +1,6 @@
 import requests
 
-BASE = 'http://220.149.232.226:10000/api'
+BASE = 'http://220.149.232.226:10011/api'
 
 resp = requests.get(f'{BASE}/hello')
 print(resp.status_code)
